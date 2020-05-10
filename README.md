@@ -78,13 +78,13 @@ yarn add state-prism
 
 ## :newspaper: API
 
-### `Basic`
+#### `Basic`
 
 [init](docs/init.md) - Initialize `state-prism` with your state object. Enables listening to changes.
 
 [subscribe](docs/subscribe.md) - Attach a callback to a path in your state. The callback will be called whenever the state changes.
 
-### `Advanced`
+#### `Advanced`
 
 [target](docs/target.md) - Access the original state object. You probably won't need this.
 
@@ -114,18 +114,17 @@ export default prism.init(state)
 | -------------- | ---------------------------------------------- |
 | `yarn build`   | Generate files in the `dist` folder            |
 | `yarn release` | Start the process to release a new version     |
-| `yarn tsc`     | Run a type check with `typescript`             |
-| `yarn lint`    | Lint with `eslint`                             |
+| `yarn qa`      | Run `tsc` and `xo`                             |
 | `yarn clean`   | Remove build artefact (`.tgz` file)            |
 | `yarn go`      | Builds, packs and installs to `example` folder |
 
 ### Workflow
 
 1. Make changes
-2. `yarn go` and verify that your changes work.
-3. Commit to `master` or make `PR`
+2. Update tests
+3. `yarn go` and verify that your changes work.
+4. Commit to `master` or make `PR`
 
 #### Release
 
-1. `yarn release:prepare` - Sets up your library for release
-2. If everything worked in the previous step: `yarn release`
+`yarn release`
