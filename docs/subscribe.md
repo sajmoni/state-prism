@@ -4,21 +4,21 @@ prism.subscribe(path, callback)
 
 Subscribe to state changes.
 
-From the [`on-change`](https://github.com/sindresorhus/on-change) docs:
+Detects deep changes to your state such as:
 
-```
-It works recursively, so it will even detect if you modify a deep property like obj.a.b[0].c = true.
+```js
+state.a.b[0].c = true.
 ```
 
 ## Arguments
 
-`path` (string): Object you want to listen to.
+`path` (string): The path in the state object that you want to listen to.
 
-`callback` ((value, previousValue) => void): This callback is called whenever the value is changed
+`callback` ((value, previousValue) => void): The callback is called whenever the value is changed
 
 ## Returns
 
-`Unsubscribe` (() => void): A function that cancels the subscription. 
+`unsubscribe` (() => void): A function that cancels the subscription.
 
 ## Example
 
@@ -30,6 +30,6 @@ const unsubscribe = prism.subscribe('application.volume', (volume, previousVolum
   console.log('previousVolume', previousVolume)
 }
 
-// Later when you don't need the listener any more, do:
+// Later when you don't need to subscribe any more, do:
 unsubscribe()
 ```

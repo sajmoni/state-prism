@@ -1,5 +1,3 @@
-# Example docs
-
 ```js
 prism.init(state)
 ```
@@ -8,11 +6,11 @@ Enable subscribing to changes.
 
 ## Arguments
 
-`State` (object): Object you want to listen to.
+`state` (object): The object you want to listen to.
 
 ## Returns
 
-`State` (object): The same object that is now possible to subscribe to.
+`state` (object): The same object that is now possible to subscribe to.
 
 ## Example
 

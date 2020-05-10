@@ -12,7 +12,7 @@
 
 ## :sparkles: Features
 
-`state-prism` lets you subscribe to changes to state. It is thin layer on top of [`on-change`](https://github.com/sindresorhus/on-change).
+`state-prism` lets you subscribe to state changes. It is thin layer on top of [`on-change`](https://github.com/sindresorhus/on-change).
 
 I use it mainly for games. Whenever the game's state is updated, I trigger a callback to re render UI components that are dependent on that state.
 
@@ -78,11 +78,15 @@ yarn add state-prism
 
 ## :newspaper: API
 
-[init](docs/init.md) - Pass your state
+### `Basic`
 
-[subscribe](docs/subscribe.md) - Subscribe to state changes
+[init](docs/init.md) - Initialize `state-prism` with your state object. Enables listening to changes.
 
-[target](docs/target.md) - Access the original object. Enables destructuring.
+[subscribe](docs/subscribe.md) - Attach a callback to a path in your state. The callback will be called whenever the state changes.
+
+### `Advanced`
+
+[target](docs/target.md) - Access the original state object. You probably won't need this.
 
 ---
 
@@ -99,7 +103,6 @@ const state = {
 
 export default prism.init(state)
 ```
-
 
 ---
 

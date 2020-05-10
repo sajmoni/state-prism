@@ -6,28 +6,24 @@ Returns the original unwatched object.
 
 This function is the same as in [`onChange`](https://github.com/sindresorhus/on-change#onchangetargetobject).
 
-_Enables destructuring_
+_Enables destructuring the state_
 
 ## Arguments
 
-`State` (object): The object that you are listening to
+`state` (object): The object that you are listening to
 
 ## Returns
 
-`State` (object): The same object that is now possible to subscribe to.
+`state` (object): The original object that was passed to [`init`](init.md)
 
 ## Example
 
-I usually put my state in a file called `state.js`
-
-`state.js`
-
 ```ts
-import * as sp from 'state-prism'
+import * as prism from 'state-prism'
+import state from './state'
 
-const state = {
-  x: 0,
-}
+const unwatchedState = prism.target(state)
 
-export default sp.init(state)
+// Now possible to destructure state
+const { x, y } = unwatchedState
 ```
