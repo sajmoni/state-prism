@@ -6,10 +6,7 @@
   "keywords": [],
   "scripts": {
     "build": "rm -rf dist && rollup --config rollup.config.js",
-    "test": "ava",
-    "plop": "plop",
-    "release": "np",
-    "release:prepare": "yarn clean && yarn audit && yarn build && np --preview",
+    "release": "yarn clean && yarn audit && yarn build && np",
     "clean": "rm -f state-prism.tgz",
     "qa": "yarn tsc && yarn xo --fix",
     "go": "./build-test.sh"
@@ -20,11 +17,6 @@
   ],
   "directories": {
     "example": "example"
-  },
-  "ava": {
-    "require": [
-      "./script/setupTests.js"
-    ]
   },
   "prettier": {
     "trailingComma": "all",
@@ -47,24 +39,19 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
+      "pre-commit": "lint-staged"
     }
   },
   "devDependencies": {
-    "@babel/core": "7.9.6",
-    "@babel/preset-env": "7.9.6",
-    "@babel/preset-typescript": "7.9.0",
-    "@babel/register": "7.9.0",
-    "@rollup/plugin-commonjs": "11.1.0",
     "@rollup/plugin-typescript": "4.1.1",
-    "ava": "3.8.1",
     "husky": "4.2.5",
     "lint-staged": "10.2.2",
     "np": "6.2.3",
-    "plop": "2.6.0",
     "rollup": "2.7.6",
     "typescript": "3.8.3",
     "xo": "0.30.0"
+  },
+  "dependencies": {
+    "on-change": "2.0.1"
   }
 }
