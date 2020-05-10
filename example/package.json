@@ -1,0 +1,11 @@
+{
+  "name": "example",
+  "private": true,
+  "scripts": {
+    "start": "node .",
+    "refresh": "yarn cache clean && yarn install --force --no-lockfile"
+  },
+  "dependencies": {
+    "state-prism": "file:../state-prism.tgz"
+  }
+}
