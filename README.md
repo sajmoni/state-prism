@@ -25,13 +25,15 @@ Let's say my state looks like this:
 `state.js`
 
 ```js
-import * as prism from 'state-prism'
+import { init } from 'state-prism'
 
-export default prism.init({
+const state = {
   player: {
     mana: 10,
   },
-})
+}
+
+export default init(state)
 ```
 
 Somewhere in my code the player spends 5 mana:
@@ -49,9 +51,9 @@ Then I can re render my UI component that renders the mana.
 `ui.js`
 
 ```js
-import * as prism from 'state-prism'
+import { subscribe } from 'state-prism'
 
-prism.subscribe('player.mana', (mana) => {
+subscribe('player.mana', (mana) => {
   renderMana(mana)
 })
 ```
@@ -86,7 +88,12 @@ yarn add state-prism
 
 #### `Advanced`
 
-[target](docs/target.md) - Access the original state object. You probably won't need this.
+[target](docs/target.md) - Access the original state object.
+
+Useful for:
+
+ - Logging
+ - Destructuring
 
 ---
 
