@@ -29,7 +29,7 @@ export const init = <State>(state: State): State => {
 export const target = <State>(state: Readonly<State>): State =>
   onChange.target(state)
 
-type callback = <T>(value: T, previousValue: T) => void
+type callback = (value: any, previousValue: any) => void
 
 type unsubscribe = () => void
 
