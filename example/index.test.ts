@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable ava/no-ignored-test-files */
 
 const test = require('ava')
 const { init, subscribe } = require('state-prism')
+
+const externalState = {
+  number: 0,
+}
 
 test.cb('state-prism', (t) => {
   t.plan(4)
@@ -16,6 +19,7 @@ test.cb('state-prism', (t) => {
 
   const unsubscribe = subscribe('x', (newX) => {
     subscriberTriggered += 1
+    externalState.number = newX
     t.is(newX, 1)
   })
 
