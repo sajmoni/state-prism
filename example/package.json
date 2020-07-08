@@ -2,7 +2,7 @@
   "name": "example",
   "private": true,
   "scripts": {
-    "test": "ava",
+    "test": "ava && node performance.js",
     "refresh": "yarn cache clean && yarn install --force --no-lockfile"
   },
   "ava": {
