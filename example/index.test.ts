@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const test = require('ava')
-const { init, subscribe } = require('state-prism')
+const { init, subscribe, getSubscriberCount } = require('state-prism')
 
 const externalState = {
   number: 0,
@@ -30,4 +30,24 @@ test.cb('state-prism', (t) => {
   state.x += 1
   t.is(subscriberTriggered, 1)
   t.end()
+})
+
+test('getSubscriberCount', (t) => {
+  init({
+    x: 0,
+    y: 'y',
+  })
+
+  let unsubscribes = []
+  unsubscribes.push(subscribe('x', () => {}))
+  unsubscribes.push(subscribe('x', () => {}))
+  unsubscribes.push(subscribe('y', () => {}))
+
+  t.is(getSubscriberCount(), 3)
+
+  unsubscribes.forEach((unsubscribe) => {
+    unsubscribe()
+  })
+
+  t.is(getSubscriberCount(), 0)
 })

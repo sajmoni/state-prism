@@ -51,3 +51,14 @@ export const subscribe = (path: string, callback: callback): unsubscribe => {
 
   return unsubscribe
 }
+
+export const getSubscriberCount = () => {
+  return (
+    Object.values(subscriber)
+      .map((callbacks) => {
+        return callbacks.length
+      })
+      // eslint-disable-next-line unicorn/no-reduce
+      .reduce((total, callbacksLength) => total + callbacksLength, 0)
+  )
+}

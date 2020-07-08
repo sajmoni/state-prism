@@ -92,8 +92,10 @@ yarn add state-prism
 
 Useful for:
 
- - Logging
- - Destructuring
+- Logging
+- Destructuring
+
+[getSubscriberCount](docs/getSubscriberCount.md) - Get the total subscribers count.
 
 ---
 
