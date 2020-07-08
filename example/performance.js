@@ -8,11 +8,12 @@ const state = init({
 const measurePerformance = () => {
   const before = performance.now()
 
-  let unsubscribes = []
+  const unsubscribes = []
   for (let index = 0; index < 200; index++) {
     const unsubscribe = subscribe('foo', () => {})
     unsubscribes.push(unsubscribe)
   }
+
   state.foo += 1
 
   unsubscribes.forEach((unsubscribe) => {

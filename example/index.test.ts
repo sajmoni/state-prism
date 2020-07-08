@@ -7,6 +7,9 @@ const externalState = {
   number: 0,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {}
+
 test.cb('state-prism', (t) => {
   t.plan(4)
   let subscriberTriggered = 0
@@ -38,10 +41,10 @@ test('getSubscriberCount', (t) => {
     y: 'y',
   })
 
-  let unsubscribes = []
-  unsubscribes.push(subscribe('x', () => {}))
-  unsubscribes.push(subscribe('x', () => {}))
-  unsubscribes.push(subscribe('y', () => {}))
+  const unsubscribes = []
+  unsubscribes.push(subscribe('x', noop))
+  unsubscribes.push(subscribe('x', noop))
+  unsubscribes.push(subscribe('y', noop))
 
   t.is(getSubscriberCount(), 3)
 
