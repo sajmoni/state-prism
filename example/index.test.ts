@@ -3,16 +3,15 @@
 const test = require('ava')
 const { init, subscribe, getSubscriberCount } = require('state-prism')
 
-const externalState = {
-  number: 0,
-}
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {}
-
 test.cb('state-prism', (t) => {
-  t.plan(4)
-  let subscriberTriggered = 0
+  const externalState = {
+    number: 0,
+  }
+
+  t.plan(9)
+
+  let subscriber1Triggered = 0
+  let subscriber2Triggered = 0
 
   const state = init({
     x: 0,
@@ -20,37 +19,31 @@ test.cb('state-prism', (t) => {
     z: false,
   })
 
-  const unsubscribe = subscribe('x', (newX) => {
-    subscriberTriggered += 1
+  t.is(getSubscriberCount(), 0)
+  const unsubscribe1 = subscribe('x', (newX) => {
+    subscriber1Triggered += 1
     externalState.number = newX
-    t.is(newX, 1)
   })
 
-  t.is(subscriberTriggered, 0)
+  subscribe('x', (newX) => {
+    subscriber2Triggered += 1
+    externalState.number = newX
+  })
+  t.is(getSubscriberCount(), 2)
+
+  t.is(subscriber1Triggered, 0)
+  t.is(subscriber2Triggered, 0)
   state.x += 1
-  t.is(subscriberTriggered, 1)
-  unsubscribe()
+  t.is(subscriber1Triggered, 1)
+  t.is(subscriber2Triggered, 1)
+  unsubscribe1()
+  t.is(getSubscriberCount(), 1)
   state.x += 1
-  t.is(subscriberTriggered, 1)
+  t.is(subscriber1Triggered, 1)
+  t.is(subscriber2Triggered, 2)
   t.end()
 })
 
-test('getSubscriberCount', (t) => {
-  init({
-    x: 0,
-    y: 'y',
-  })
-
-  const unsubscribes = []
-  unsubscribes.push(subscribe('x', noop))
-  unsubscribes.push(subscribe('x', noop))
-  unsubscribes.push(subscribe('y', noop))
-
-  t.is(getSubscriberCount(), 3)
-
-  unsubscribes.forEach((unsubscribe) => {
-    unsubscribe()
-  })
-
-  t.is(getSubscriberCount(), 0)
+test('throw error if init is called more than once', (t) => {
+  t.throws(() => init({}))
 })

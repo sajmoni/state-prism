@@ -5,6 +5,7 @@ type Subscriber = {
 }
 
 const subscriber: Subscriber = {}
+let hasBeenInitialized = false
 
 const onChangeFn = (path: string, value: any, previousValue: any) => {
   if (!subscriber[path]) {
@@ -20,6 +21,13 @@ const onChangeFn = (path: string, value: any, previousValue: any) => {
  * Enables subscribing to state changes
  */
 export const init = <State>(state: State): State => {
+  if (hasBeenInitialized) {
+    throw new Error(
+      'state-prism: init has already been called once. state-prism currently only supports one state',
+    )
+  }
+
+  hasBeenInitialized = true
   return onChange(state, onChangeFn)
 }
 
