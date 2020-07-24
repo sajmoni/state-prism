@@ -43,13 +43,13 @@
     }
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "5.0.0",
+    "@rollup/plugin-typescript": "5.0.2",
     "husky": "4.2.5",
     "lint-staged": "10.2.11",
-    "np": "6.2.4",
-    "rollup": "2.18.0",
-    "typescript": "3.9.5",
-    "xo": "0.32.0"
+    "np": "6.3.2",
+    "rollup": "2.23.0",
+    "typescript": "3.9.7",
+    "xo": "0.32.1"
   },
   "dependencies": {
     "on-change": "2.0.1"
