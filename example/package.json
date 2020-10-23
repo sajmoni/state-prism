@@ -6,6 +6,9 @@
     "refresh": "yarn cache clean && yarn install --force --no-lockfile"
   },
   "ava": {
+    "require": [
+      "./setupTests.js"
+    ],
     "extensions": [
       "ts"
     ]
@@ -14,7 +17,10 @@
     "state-prism": "file:../state-prism.tgz"
   },
   "devDependencies": {
-    "@ava/typescript": "1.1.1",
+    "@babel/core": "7.12.3",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-typescript": "7.12.1",
+    "@babel/register": "7.12.1",
     "ava": "3.10.1"
   }
 }

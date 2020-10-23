@@ -1,20 +1,24 @@
 import onChange from 'on-change'
 
+type subscriberValue = { callback: callback; options: options }
+
 type Subscriber = {
-  [key: string]: callback[]
+  [key: string]: subscriberValue[]
 }
 
 const subscriber: Subscriber = {}
 let hasBeenInitialized = false
 
 const onChangeFn = (path: string, value: any, previousValue: any) => {
-  if (!subscriber[path]) {
-    return
-  }
+  // if (!subscriber[path]) {
+  //   return
+  // }
 
-  subscriber[path].forEach((callback: callback) => {
-    callback(value, previousValue)
-  })
+  subscriber[path]
+    .filter(({ options }) => options.enabled === undefined || options.enabled())
+    .forEach(({ callback }) => {
+      callback(value, previousValue)
+    })
 }
 
 /**
@@ -39,18 +43,28 @@ export const target = <State>(state: Readonly<State>): State =>
 
 type callback = (value: any, previousValue: any) => void
 
+type options = {
+  enabled?: () => boolean
+}
+
 type unsubscribe = () => void
 
 /**
  * Subscribe to state changes
  */
-export const subscribe = (path: string, callback: callback): unsubscribe => {
+export const subscribe = (
+  path: string,
+  callback: callback,
+  options: options = {},
+): unsubscribe => {
+  const subscriberValue = { callback, options }
+
   subscriber[path] = subscriber[path]
-    ? subscriber[path].concat(callback)
-    : [callback]
+    ? subscriber[path].concat(subscriberValue)
+    : [subscriberValue]
 
   const unsubscribe = () => {
-    const indexToRemove = subscriber[path].indexOf(callback)
+    const indexToRemove = subscriber[path].indexOf(subscriberValue)
     if (indexToRemove >= 0) {
       // * Mutate array for performance reasons
       subscriber[path].splice(indexToRemove, 1)
