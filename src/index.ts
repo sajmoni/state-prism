@@ -2,9 +2,7 @@ import onChange from 'on-change'
 
 type subscriberValue = { callback: callback; options: options }
 
-type Subscriber = {
-  [key: string]: subscriberValue[]
-}
+type Subscriber = Record<string, subscriberValue[]>
 
 const subscriber: Subscriber = {}
 let hasBeenInitialized = false
