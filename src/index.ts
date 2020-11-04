@@ -72,12 +72,28 @@ export const subscribe = (
   return unsubscribe
 }
 
-export const getSubscriberCount = () => {
+/**
+ * Get the amount of subscribers per path
+ *
+ * Should only be used when debugging
+ */
+export const getSubscribers = (): Record<string, number> => {
+  const entries = Object.entries(subscriber).map(([path, callbacks]) => {
+    return [path, callbacks.length]
+  })
+
+  return Object.fromEntries(entries)
+}
+
+/**
+ * Get the total amount of subscriber functions
+ *
+ * Should only be used when debugging
+ */
+export const getSubscriberCount = (): number => {
   return (
     Object.values(subscriber)
-      .map((callbacks) => {
-        return callbacks.length
-      })
+      .map((callbacks) => callbacks.length)
       // eslint-disable-next-line unicorn/no-reduce
       .reduce((total, callbacksLength) => total + callbacksLength, 0)
   )
