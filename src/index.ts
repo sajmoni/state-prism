@@ -8,10 +8,6 @@ const subscriber: Subscriber = {}
 let hasBeenInitialized = false
 
 const onChangeFn = (path: string, value: any, previousValue: any) => {
-  // if (!subscriber[path]) {
-  //   return
-  // }
-
   subscriber[path]
     .filter(({ options }) => options.enabled === undefined || options.enabled())
     .forEach(({ callback }) => {
@@ -34,7 +30,7 @@ export const init = <State>(state: State): State => {
 }
 
 /**
- * Get state as a regular JavaScript object. Enables destructuring.
+ * Get state as a regular JavaScript object. Enables destructuring and logging.
  */
 export const target = <State>(state: Readonly<State>): State =>
   onChange.target(state)
@@ -51,8 +47,23 @@ type unsubscribe = () => void
  * Subscribe to state changes
  */
 export const subscribe = (
+  /**
+   * The path in state to subscribe to
+   *
+   * @example state.player.mana
+   */
   path: string,
+  /**
+   * Callback function that will be called on each state update
+   *
+   * @example (value, previousValue) => renderMana(value)
+   */
   callback: callback,
+  /**
+   * Options
+   *
+   * @example { enable: () => state.scene === 'battle' }
+   */
   options: options = {},
 ): unsubscribe => {
   const subscriberValue = { callback, options }

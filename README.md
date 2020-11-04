@@ -101,16 +101,22 @@ Useful for:
 
 ## :book: Recipes
 
-I usually put my state in a file called `state.js`:
+### Dynamically activate listeners
+
+If you are creating an advanced application you probably don't want all listeners to be active at the same time.
+
+For example, if you only want to render mana during `battle`, you can do this:
 
 ```ts
 import * as prism from 'state-prism'
 
-const state = {
-  x: 0,
-}
-
-export default prism.init(state)
+prism.subscribe(
+  'player.mana', 
+  (mana) => {
+    renderMana(mana)
+  }, 
+  { enabled: () => state.scene === 'battle' }
+)
 ```
 
 ---
