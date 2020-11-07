@@ -1,8 +1,8 @@
 import onChange from 'on-change'
 
-type subscriberValue = { callback: callback; options: options }
+export type subscriberValue = { callback: callback; options: options }
 
-type Subscriber = Record<string, subscriberValue[]>
+export type Subscriber = Record<string, subscriberValue[]>
 
 const subscriber: Subscriber = {}
 let hasBeenInitialized = false
@@ -35,13 +35,13 @@ export const init = <State>(state: State): State => {
 export const target = <State>(state: Readonly<State>): State =>
   onChange.target(state)
 
-type callback = (value: any, previousValue: any) => void
+export type callback = (value: any, previousValue: any) => void
 
-type options = {
+export type options = {
   enabled?: () => boolean
 }
 
-type unsubscribe = () => void
+export type unsubscribe = () => void
 
 /**
  * Subscribe to state changes

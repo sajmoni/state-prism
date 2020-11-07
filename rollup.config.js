@@ -9,6 +9,6 @@ export default {
     dir: OUTPUT_FOLDER,
     format: 'cjs',
   },
-  external: [],
+  external: ['on-change'],
   plugins: [typescript()],
 }
