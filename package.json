@@ -18,6 +18,10 @@
   "directories": {
     "example": "example"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajmoni/state-prism.git"
+  },
   "prettier": {
     "trailingComma": "all",
     "semi": false,
