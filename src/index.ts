@@ -8,6 +8,10 @@ const subscriber: Subscriber = {}
 let hasBeenInitialized = false
 
 const onChangeFn = (path: string, value: any, previousValue: any) => {
+  if (!subscriber[path]) {
+    return
+  }
+
   subscriber[path]
     .filter(({ options }) => options.enabled === undefined || options.enabled())
     .forEach(({ callback }) => {

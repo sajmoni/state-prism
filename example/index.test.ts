@@ -38,6 +38,9 @@ test.cb('state-prism', (t) => {
     // Do nothing
   })
 
+  // No subscribers for this field, should not crash
+  state.z = true
+
   t.is(prism.getSubscriberCount(), 3)
   t.deepEqual(prism.getSubscribers(), {
     x: 2,
