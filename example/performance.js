@@ -16,9 +16,9 @@ const measurePerformance = () => {
 
   state.foo += 1
 
-  unsubscribes.forEach((unsubscribe) => {
+  for (const unsubscribe of unsubscribes) {
     unsubscribe()
-  })
+  }
 
   const after = performance.now()
   const delta = after - before

@@ -14,6 +14,7 @@ const onChangeFn = (path: string, value: any, previousValue: any) => {
 
   subscriber[path]
     .filter(({ options }) => options.enabled === undefined || options.enabled())
+    // eslint-disable-next-line unicorn/no-array-for-each
     .forEach(({ callback }) => {
       callback(value, previousValue)
     })
@@ -109,7 +110,7 @@ export const getSubscriberCount = (): number => {
   return (
     Object.values(subscriber)
       .map((callbacks) => callbacks.length)
-      // eslint-disable-next-line unicorn/no-reduce
+      // eslint-disable-next-line unicorn/no-array-reduce
       .reduce((total, callbacksLength) => total + callbacksLength, 0)
   )
 }
