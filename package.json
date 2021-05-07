@@ -47,15 +47,15 @@
     }
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "8.2.0",
+    "@rollup/plugin-typescript": "8.2.1",
     "husky": "4.3.6",
     "lint-staged": "10.5.4",
-    "np": "7.4.0",
-    "rollup": "2.40.0",
-    "typescript": "4.2.3",
-    "xo": "0.38.2"
+    "np": "7.5.0",
+    "rollup": "2.47.0",
+    "typescript": "4.2.4",
+    "xo": "0.39.1"
   },
   "dependencies": {
-    "on-change": "2.2.3"
+    "on-change": "3.0.1"
   }
 }
