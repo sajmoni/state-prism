@@ -30,16 +30,7 @@
     "bracketSpacing": true
   },
   "xo": {
-    "prettier": true,
-    "env": [
-      "es2020",
-      "node"
-    ],
-    "rules": {
-      "unicorn/filename-case": "off",
-      "capitalized-comments": "off",
-      "dot-notation": "off"
-    }
+    "prettier": true
   },
   "husky": {
     "hooks": {
