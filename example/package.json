@@ -7,7 +7,7 @@
   },
   "ava": {
     "require": [
-      "./setupTests.js"
+      "./setup-tests.js"
     ],
     "extensions": [
       "ts"
