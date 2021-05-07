@@ -12,12 +12,11 @@ const onChangeFn = (path: string, value: any, previousValue: any) => {
     return
   }
 
-  subscriber[path]
-    .filter(({ options }) => options.enabled === undefined || options.enabled())
-    // eslint-disable-next-line unicorn/no-array-for-each
-    .forEach(({ callback }) => {
+  for (const { callback, options } of subscriber[path]) {
+    if (options.enabled === undefined || options.enabled()) {
       callback(value, previousValue)
-    })
+    }
+  }
 }
 
 /**
@@ -73,14 +72,15 @@ export const subscribe = (
 ): unsubscribe => {
   const subscriberValue = { callback, options }
 
-  subscriber[path] = subscriber[path]
-    ? subscriber[path].concat(subscriberValue)
-    : [subscriberValue]
+  if (subscriber[path]) {
+    subscriber[path].push(subscriberValue)
+  } else {
+    subscriber[path] = [subscriberValue]
+  }
 
   const unsubscribe = () => {
     const indexToRemove = subscriber[path].indexOf(subscriberValue)
     if (indexToRemove >= 0) {
-      // * Mutate array for performance reasons
       subscriber[path].splice(indexToRemove, 1)
     }
   }
@@ -107,10 +107,10 @@ export const getSubscribers = (): Record<string, number> => {
  * Should only be used when debugging
  */
 export const getSubscriberCount = (): number => {
-  return (
-    Object.values(subscriber)
-      .map((callbacks) => callbacks.length)
-      // eslint-disable-next-line unicorn/no-array-reduce
-      .reduce((total, callbacksLength) => total + callbacksLength, 0)
-  )
+  let subscriberCount = 0
+  for (const callbacks of Object.values(subscriber)) {
+    subscriberCount += callbacks.length
+  }
+
+  return subscriberCount
 }
