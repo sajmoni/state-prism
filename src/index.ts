@@ -82,6 +82,10 @@ export const subscribe = (
     const indexToRemove = subscriber[path].indexOf(subscriberValue)
     if (indexToRemove >= 0) {
       subscriber[path].splice(indexToRemove, 1)
+      if (subscriber[path].length === 0) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete subscriber[path]
+      }
     }
   }
 

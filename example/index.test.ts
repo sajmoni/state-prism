@@ -21,7 +21,7 @@ test('state-prism', (t) => {
     externalState.number = newX
   })
 
-  prism.subscribe(
+  const unsubscribeX2 = prism.subscribe(
     'x',
     (newX) => {
       subscriber2Triggered += 1
@@ -55,6 +55,10 @@ test('state-prism', (t) => {
   state.x += 1
   t.is(subscriber1Triggered, 1)
   t.is(subscriber2Triggered, 2)
+  unsubscribeX2()
+  t.deepEqual(prism.getSubscribers(), {
+    y: 1,
+  })
   state.x += 1
   t.is(subscriber2Triggered, 2)
 })
