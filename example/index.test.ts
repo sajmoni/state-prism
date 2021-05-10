@@ -1,12 +1,10 @@
 import test from 'ava'
 import * as prism from 'state-prism'
 
-test.cb('state-prism', (t) => {
+test('state-prism', (t) => {
   const externalState = {
     number: 0,
   }
-
-  t.plan(11)
 
   let subscriber1Triggered = 0
   let subscriber2Triggered = 0
@@ -59,7 +57,6 @@ test.cb('state-prism', (t) => {
   t.is(subscriber2Triggered, 2)
   state.x += 1
   t.is(subscriber2Triggered, 2)
-  t.end()
 })
 
 test('throw error if init is called more than once', (t) => {
