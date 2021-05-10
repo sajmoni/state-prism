@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "ava && node performance.js",
-    "refresh": "yarn cache clean && yarn install --force --no-lockfile"
+    "refresh": "yarn cache clean state-prism && rm -rf $(yarn cache dir)/.tmp && yarn add file:../state-prism.tgz"
   },
   "ava": {
     "require": [
