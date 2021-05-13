@@ -14,6 +14,9 @@
     "go": "./build-test.sh"
   },
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=12"
+  },
   "files": [
     "dist/"
   ],
