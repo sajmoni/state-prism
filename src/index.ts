@@ -102,7 +102,7 @@ export const getSubscribers = (): Record<string, number> => {
     return [path, callbacks.length]
   })
 
-  return Object.fromEntries(entries)
+  return Object.fromEntries(entries) as Record<string, number>
 }
 
 /**
