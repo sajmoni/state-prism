@@ -1,5 +1,6 @@
-const { init, subscribe } = require('state-prism')
-const { performance } = require('perf_hooks')
+import { performance } from 'perf_hooks'
+
+import { init, subscribe } from 'state-prism'
 
 const state = init({
   foo: 0,

@@ -16,14 +16,14 @@ test('state-prism', (t) => {
   })
 
   t.is(prism.getSubscriberCount(), 0)
-  const unsubscribe1 = prism.subscribe('x', (newX) => {
+  const unsubscribe1 = prism.subscribe('x', (newX: number) => {
     subscriber1Triggered += 1
     externalState.number = newX
   })
 
   const unsubscribeX2 = prism.subscribe(
     'x',
-    (newX) => {
+    (newX: number) => {
       subscriber2Triggered += 1
       externalState.number = newX
     },
